@@ -42,4 +42,21 @@ int main(int argc, char *argv[]){
     if(bind(servSock, (struct sockaddr *) &echoServAddr, sizeof(echoServAddr)) < 0){
         DieWithError("bind() failed");
     }
+
+
+    if(listen(servSock, MAXPENDING) < 0){
+        DieWithError("listen() failed");
+    }
+
+    for(;;){
+        clntLen = sizeof(echoClntAddr);
+
+        if((clntSock = accept(servSock, (struct sockaddr *) &echoClntAddr, &clntLen)) < 0){
+            DieWithError("accept() failed");
+        }
+
+        printf("Handling client %s\n", inet ntoa(echoClntAddr.sin_addr));
+
+        HandleTCPClient(clntSock);
+    }
 }
