@@ -55,7 +55,7 @@ int main(int argc, char *argv[]){
             DieWithError("accept() failed");
         }
 
-        printf("Handling client %s\n", inet ntoa(echoClntAddr.sin_addr));
+        printf("Handling client %s\n", inet_ntoa(echoClntAddr.sin_addr));
 
         HandleTCPClient(clntSock);
     }
