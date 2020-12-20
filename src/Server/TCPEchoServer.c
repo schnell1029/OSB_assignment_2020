@@ -43,7 +43,7 @@ int main(int argc, char *argv[]){
         DieWithError("bind() failed");
     }
 
-
+    // 接続要求を待ち受け
     if(listen(servSock, MAXPENDING) < 0){
         DieWithError("listen() failed");
     }
@@ -55,7 +55,9 @@ int main(int argc, char *argv[]){
             DieWithError("accept() failed");
         }
 
-        printf("Handling client %s\n", inet ntoa(echoClntAddr.sin_addr));
+        
+
+        printf("Handling client %s\n", inet_ntoa(echoClntAddr.sin_addr));
 
         HandleTCPClient(clntSock);
     }
